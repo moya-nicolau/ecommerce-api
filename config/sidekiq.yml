@@ -1,0 +1,16 @@
+:verbose: true
+:pidfile: ./tmp/pids/sidekiq.pid
+:concurrency: 2
+:queues:
+  - default
+  - mark_cart_as_abandoned
+  - destroy_abandoned_carts
+
+:scheduler:
+  :schedule:
+    abandon_carts:
+      every: 30 minutes
+      class: MarkCartAsAbandonedJob
+    destroy_carts:
+      every: 6 hours
+      class: DestroyAbandonedCartJob

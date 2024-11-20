@@ -1,0 +1,56 @@
+version: '1'
+services:
+  db:
+    image: 'postgres:16-alpine'
+    env_file: .env.development
+    volumes:
+      - 'postgres:/var/lib/postgresql/data'
+      - './backups:/var/lib/postgresql/backups'
+    networks:
+      - ecommerce-net
+    ports:
+      - "5432:5432"
+  redis:
+    image: redis:7.2.1
+    ports:
+      - 6379:6379
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      - ecommerce-net
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: bundle exec rails s -b 0.0.0.0 -p 3000
+    env_file: .env.development
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    networks:
+      - ecommerce-net
+  sidekiq:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: bundle exec sidekiq
+    env_file: .env.development
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
+    networks:
+      - ecommerce-net
+volumes:
+  redis:
+  postgres:
+networks:
+  ecommerce-net:
+    driver: bridge

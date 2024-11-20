@@ -1,0 +1,14 @@
+
+FROM ruby:3.3.0-alpine
+
+RUN apk update && apk add --update --no-cache build-base tzdata libpq postgresql-dev git postgresql-client glib vips-dev
+
+WORKDIR /app
+
+ADD Gemfile /app/Gemfile
+ADD Gemfile.lock /app/Gemfile.lock
+
+RUN gem install bundler
+RUN bundle install --jobs 20 --retry 5
+# RUN bundle binstubs annotate bundler-audit puma rails_best_practices rspec-core rubocop thor
+ENV EDITOR=vi

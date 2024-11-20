@@ -1,0 +1,102 @@
+require:
+  - "rubocop-rails"
+  - "rubocop-rspec"
+  - "rubocop-factory_bot"
+  - "rubocop-rspec_rails"
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - "bin/**/*"
+    - "db/schema.rb"
+    - "node_modules/**/*"
+    - "vendor/**/*"
+    - "bin/*"
+    - "db/migrate/*"
+Layout/LineLength:
+  Enabled: false
+Lint/ShadowingOuterLocalVariable:
+  Exclude:
+    - "lib/**/*"
+Metrics/BlockLength:
+  Exclude:
+    - "app/admin/**/*"
+    - "config/**/*"
+    - "lib/**/*"
+    - "spec/**/*"
+Naming/PredicateName:
+  Exclude:
+    - "lib/**/*"
+Naming/VariableName:
+  Exclude:
+    - "spec/**/*"
+Security/Open:
+  Exclude:
+    - "lib/**/*"
+Style/ClassAndModuleChildren:
+  Exclude:
+    - "spec/**/*"
+Style/Documentation:
+  Enabled: false
+Style/DocumentationMethod:
+  Enabled: false
+Style/IdenticalConditionalBranches:
+  Exclude:
+    - "app/**/*"
+Rails/SkipsModelValidations:
+  Exclude:
+    - "**/*"
+Metrics/AbcSize:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Lint/DuplicateBranch:
+  Exclude:
+    - "db/**/*"
+    - "config/**/*"
+    - "lib/**/*"
+Rails/UniqueValidationWithoutIndex:
+  Exclude:
+    - "app/**/*"
+Rails/I18nLocaleTexts:
+  Exclude:
+    - "app/**/*"
+Rails/HasAndBelongsToMany:
+  Exclude:
+    - "app/**/*"
+
+RSpec/PendingWithoutReason:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Max: 30
+
+RSpec/NestedGroups:
+  Max: 10
+
+RSpec/MessageChain:
+  Enabled: false
+
+RSpec/IndexedLet:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/NamedSubject:
+  Enabled: false
+
+Style/SymbolProc:
+  Enabled: false
